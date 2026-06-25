@@ -1,52 +1,83 @@
-import { useState, useEffect, useRef } from "react";
-import { Bell, Sparkles, Gift, Zap, Info, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/shared/lib/utils";
+import { useState, useEffect, useRef } from 'react'
+import { Bell, Sparkles, Gift, Zap, Info, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { cn } from '@/shared/lib/utils'
 
 interface Notification {
-  id: string;
-  icon: "gift" | "spark" | "zap" | "info";
-  title: string;
-  desc: string;
-  time: string;
-  read: boolean;
+  id: string
+  icon: 'gift' | 'spark' | 'zap' | 'info'
+  title: string
+  desc: string
+  time: string
+  read: boolean
 }
 
 const defaultNotifications: Notification[] = [
-  { id: "1", icon: "gift", title: "Добро пожаловать в ERA2!", desc: "Вам начислено 100 бесплатных кредитов. Попробуйте сгенерировать первое изображение.", time: "Сейчас", read: false },
-  { id: "2", icon: "spark", title: "Новая модель: Nano Banana 2", desc: "Премиум генерация изображений с неизменными персонажами. Попробуйте!", time: "1 час назад", read: false },
-  { id: "3", icon: "zap", title: "Seedream 5 Lite — уже доступна", desc: "Мультимодальная модель ByteDance для генерации из текста и редактирования.", time: "3 часа назад", read: true },
-  { id: "4", icon: "info", title: "Обновление тарифов", desc: "Добавлен бесплатный тариф «Старт» с 100 кредитами. Пригласите друга — получите ещё 100.", time: "Вчера", read: true },
-];
+  {
+    id: '1',
+    icon: 'gift',
+    title: 'Добро пожаловать в ERA2!',
+    desc: 'Вам начислено 100 бесплатных кредитов. Попробуйте сгенерировать первое изображение.',
+    time: 'Сейчас',
+    read: false,
+  },
+  {
+    id: '2',
+    icon: 'spark',
+    title: 'Новая модель: Nano Banana 2',
+    desc: 'Премиум генерация изображений с неизменными персонажами. Попробуйте!',
+    time: '1 час назад',
+    read: false,
+  },
+  {
+    id: '3',
+    icon: 'zap',
+    title: 'Seedream 5 Lite — уже доступна',
+    desc: 'Мультимодальная модель ByteDance для генерации из текста и редактирования.',
+    time: '3 часа назад',
+    read: true,
+  },
+  {
+    id: '4',
+    icon: 'info',
+    title: 'Обновление тарифов',
+    desc: 'Добавлен бесплатный тариф «Старт» с 100 кредитами. Пригласите друга — получите ещё 100.',
+    time: 'Вчера',
+    read: true,
+  },
+]
 
-const iconMap = { gift: Gift, spark: Sparkles, zap: Zap, info: Info };
+const iconMap = { gift: Gift, spark: Sparkles, zap: Zap, info: Info }
 
 const iconBtn =
-  "relative w-9 h-9 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:bg-card transition-colors flex items-center justify-center";
+  'relative w-9 h-9 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:bg-card transition-colors flex items-center justify-center'
 
 export function NotificationsDropdown() {
-  const [open, setOpen] = useState(false);
-  const [notifications, setNotifications] = useState(defaultNotifications);
-  const ref = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false)
+  const [notifications, setNotifications] = useState(defaultNotifications)
+  const ref = useRef<HTMLDivElement>(null)
 
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.read).length
 
-  const markAllRead = () => setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-  const dismiss = (id: string) => setNotifications((prev) => prev.filter((n) => n.id !== id));
+  const markAllRead = () => setNotifications((prev) => prev.map((n) => ({ ...n, read: true })))
+  const dismiss = (id: string) => setNotifications((prev) => prev.filter((n) => n.id !== id))
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) return
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [open]);
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [open])
 
   return (
     <div className="relative" ref={ref}>
       <button
-        onClick={() => { setOpen(!open); if (!open) markAllRead(); }}
+        onClick={() => {
+          setOpen(!open)
+          if (!open) markAllRead()
+        }}
         className={iconBtn}
         aria-label="Уведомления"
       >
@@ -54,7 +85,7 @@ export function NotificationsDropdown() {
         {unreadCount > 0 && (
           <span
             className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-primary text-white text-[10px] font-mono font-semibold flex items-center justify-center"
-            style={{ boxShadow: "0 0 6px var(--c-accent)" }}
+            style={{ boxShadow: '0 0 6px var(--c-accent)' }}
           >
             {unreadCount}
           </span>
@@ -67,11 +98,14 @@ export function NotificationsDropdown() {
             initial={{ opacity: 0, y: -8, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.97 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
             className="absolute top-full right-0 mt-2 w-[380px] max-h-[480px] overflow-y-auto rounded-[14px] border shadow-2xl z-50"
-            style={{ background: "hsl(var(--popover))", borderColor: "hsl(var(--border))" }}
+            style={{ background: 'hsl(var(--popover))', borderColor: 'hsl(var(--border))' }}
           >
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border sticky top-0" style={{ background: "hsl(var(--popover))" }}>
+            <div
+              className="flex items-center justify-between px-4 py-3 border-b border-border sticky top-0"
+              style={{ background: 'hsl(var(--popover))' }}
+            >
               <h3 className="text-sm font-semibold text-foreground">Уведомления</h3>
               {unreadCount > 0 && (
                 <button onClick={markAllRead} className="text-[12px] text-[hsl(var(--primary))] hover:underline">
@@ -88,17 +122,17 @@ export function NotificationsDropdown() {
             ) : (
               <div className="p-1.5">
                 {notifications.map((n) => {
-                  const IconComp = iconMap[n.icon];
+                  const IconComp = iconMap[n.icon]
                   return (
                     <div
                       key={n.id}
                       className={cn(
-                        "group relative flex gap-3 p-3 rounded-[8px] transition-colors hover:bg-secondary",
-                        !n.read && "bg-[rgba(232,84,32,0.06)]"
+                        'group relative flex gap-3 p-3 rounded-[8px] transition-colors hover:bg-secondary',
+                        !n.read && 'bg-[rgba(232,84,32,0.06)]',
                       )}
                     >
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ background: "rgba(232,84,32,0.12)" }}>
-                        <IconComp className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} />
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(232,84,32,0.12)' }}>
+                        <IconComp className="w-4 h-4" style={{ color: 'hsl(var(--primary))' }} />
                       </div>
                       <div className="flex-1 min-w-0 pr-5">
                         <h4 className="text-[13px] font-semibold text-foreground mb-0.5">{n.title}</h4>
@@ -113,7 +147,7 @@ export function NotificationsDropdown() {
                         <X className="w-3 h-3 text-muted-foreground" />
                       </button>
                     </div>
-                  );
+                  )
                 })}
               </div>
             )}
@@ -121,5 +155,5 @@ export function NotificationsDropdown() {
         )}
       </AnimatePresence>
     </div>
-  );
+  )
 }

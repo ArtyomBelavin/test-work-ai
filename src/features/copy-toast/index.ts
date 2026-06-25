@@ -1,1 +1,1 @@
-export { CopyToastProvider, useCopyToast } from "./model/CopyToast";
+export { CopyToastProvider, useCopyToast } from './model/CopyToast'

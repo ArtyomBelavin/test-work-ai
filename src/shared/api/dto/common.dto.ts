@@ -1,15 +1,15 @@
 export interface ApiSuccessDto<TData> {
-  data: TData;
+  data: TData
 }
 
 export interface ApiListDto<TItem> {
-  data: TItem[];
+  data: TItem[]
 }
 
 export interface ApiErrorDto {
-  message: string;
-  code?: string;
-  details?: unknown;
+  message: string
+  code?: string
+  details?: unknown
 }
 
-export type IsoDateString = string;
+export type IsoDateString = string

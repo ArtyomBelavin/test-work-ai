@@ -1,2 +1,2 @@
-export * from "./api";
-export * from "./model/assistants";
+export * from './api'
+export * from './model/assistants'

@@ -1,52 +1,44 @@
-import { Link } from "@/shared/routing";
-import {
-  Image as ImageIcon,
-  Video,
-  MessageSquare,
-  AudioLines,
-  Sparkles,
-  Bot,
-  ArrowRight,
-} from "lucide-react";
+import { Link } from '@/shared/routing'
+import { Image as ImageIcon, Video, MessageSquare, AudioLines, Sparkles, Bot, ArrowRight } from 'lucide-react'
 
 const TOOLS = [
   {
     Icon: ImageIcon,
-    title: "Генерация изображений",
-    desc: "Midjourney, Nano Banana, FLUX, GPT Image — все в одном окне",
-    to: "/tools/image-generation",
+    title: 'Генерация изображений',
+    desc: 'Midjourney, Nano Banana, FLUX, GPT Image — все в одном окне',
+    to: '/tools/image-generation',
   },
   {
     Icon: Video,
-    title: "Генерация видео",
-    desc: "Sora, Kling, Veo, Seedance и десятки моделей по подписке",
-    to: "/tools/video-generation",
+    title: 'Генерация видео',
+    desc: 'Sora, Kling, Veo, Seedance и десятки моделей по подписке',
+    to: '/tools/video-generation',
   },
   {
     Icon: MessageSquare,
-    title: "Текстовые нейросети",
-    desc: "ChatGPT, Claude, Gemini и Grok с диалогом и поиском",
-    to: "/tools/text-generation",
+    title: 'Текстовые нейросети',
+    desc: 'ChatGPT, Claude, Gemini и Grok с диалогом и поиском',
+    to: '/tools/text-generation',
   },
   {
     Icon: AudioLines,
-    title: "Аудио и музыка",
-    desc: "ElevenLabs, Suno и другие модели для голоса и треков",
-    to: "/tools/audio-generation",
+    title: 'Аудио и музыка',
+    desc: 'ElevenLabs, Suno и другие модели для голоса и треков',
+    to: '/tools/audio-generation',
   },
   {
     Icon: Sparkles,
-    title: "Nano Banana 2",
-    desc: "Премиум-генерация изображений с неизменными сюжетами",
-    to: "/tools/nano-banana",
+    title: 'Nano Banana 2',
+    desc: 'Премиум-генерация изображений с неизменными сюжетами',
+    to: '/tools/nano-banana',
   },
   {
     Icon: Bot,
-    title: "ИИ-агенты",
-    desc: "Готовые ассистенты: маркетолог, программист, копирайтер",
-    to: "/tools/agents",
+    title: 'ИИ-агенты',
+    desc: 'Готовые ассистенты: маркетолог, программист, копирайтер',
+    to: '/tools/agents',
   },
-] as const;
+] as const
 
 export function PopularToolsSection() {
   return (
@@ -63,14 +55,14 @@ export function PopularToolsSection() {
             to={to}
             className="group rounded-2xl border p-5 transition-all"
             style={{
-              backgroundColor: "hsl(var(--card))",
-              borderColor: "hsl(var(--border))",
+              backgroundColor: 'hsl(var(--card))',
+              borderColor: 'hsl(var(--border))',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(232, 84, 32, 0.4)";
+              e.currentTarget.style.borderColor = 'rgba(232, 84, 32, 0.4)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "hsl(var(--border))";
+              e.currentTarget.style.borderColor = 'hsl(var(--border))'
             }}
           >
             <div
@@ -78,8 +70,8 @@ export function PopularToolsSection() {
               style={{
                 width: 40,
                 height: 40,
-                background: "var(--c-accent-soft)",
-                color: "var(--c-accent-2)",
+                background: 'var(--c-accent-soft)',
+                color: 'var(--c-accent-2)',
               }}
             >
               <Icon size={20} strokeWidth={1.8} />
@@ -89,9 +81,9 @@ export function PopularToolsSection() {
             <p
               className="mt-1.5 text-[13px] text-muted-foreground leading-relaxed overflow-hidden"
               style={{
-                display: "-webkit-box",
+                display: '-webkit-box',
                 WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
+                WebkitBoxOrient: 'vertical',
               }}
             >
               {desc}
@@ -101,15 +93,12 @@ export function PopularToolsSection() {
               <span />
               <span className="flex items-center gap-1 text-[12px] text-muted-foreground group-hover:text-foreground transition-colors">
                 Подробнее
-                <ArrowRight
-                  size={12}
-                  className="transition-transform group-hover:translate-x-1"
-                />
+                <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
               </span>
             </div>
           </Link>
         ))}
       </div>
     </section>
-  );
+  )
 }

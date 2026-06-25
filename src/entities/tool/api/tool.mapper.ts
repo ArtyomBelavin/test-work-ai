@@ -1,5 +1,5 @@
-import type { ToolPageData } from "../model/tool-pages";
-import type { ToolPageDto } from "./tool.dto";
+import type { ToolPageData } from '../model/tool-pages'
+import type { ToolPageDto } from './tool.dto'
 
 export function mapToolPageDto(dto: ToolPageDto): ToolPageData {
   return {
@@ -12,5 +12,5 @@ export function mapToolPageDto(dto: ToolPageDto): ToolPageData {
     keyFeatureDescription: dto.key_feature_description,
     technologyDescription: dto.technology_description,
     category: dto.category,
-  };
+  }
 }

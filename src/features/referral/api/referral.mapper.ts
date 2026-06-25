@@ -1,16 +1,16 @@
-import type { ReferralProgramDto, ReferralStatsDto } from "./referral.dto";
+import type { ReferralProgramDto, ReferralStatsDto } from './referral.dto'
 
 export interface ReferralProgram {
-  referralLink: string;
-  signupRewardCredits: number;
-  paidPlanRewardCredits: number;
+  referralLink: string
+  signupRewardCredits: number
+  paidPlanRewardCredits: number
 }
 
 export interface ReferralStats {
-  totalReferrals: number;
-  successfulSignups: number;
-  paidConversions: number;
-  earnedCredits: number;
+  totalReferrals: number
+  successfulSignups: number
+  paidConversions: number
+  earnedCredits: number
 }
 
 export function mapReferralProgramDto(dto: ReferralProgramDto): ReferralProgram {
@@ -18,7 +18,7 @@ export function mapReferralProgramDto(dto: ReferralProgramDto): ReferralProgram 
     referralLink: dto.referral_link,
     signupRewardCredits: dto.signup_reward_credits,
     paidPlanRewardCredits: dto.paid_plan_reward_credits,
-  };
+  }
 }
 
 export function mapReferralStatsDto(dto: ReferralStatsDto): ReferralStats {
@@ -27,5 +27,5 @@ export function mapReferralStatsDto(dto: ReferralStatsDto): ReferralStats {
     successfulSignups: dto.successful_signups,
     paidConversions: dto.paid_conversions,
     earnedCredits: dto.earned_credits,
-  };
+  }
 }

@@ -1,14 +1,14 @@
 interface GenerationLoaderProps {
-  type: "text" | "image" | "video" | "audio";
-  model?: string;
+  type: 'text' | 'image' | 'video' | 'audio'
+  model?: string
 }
 
-const messages: Record<GenerationLoaderProps["type"], string> = {
-  text: "Генерирую ответ",
-  image: "Создаю изображение",
-  video: "Генерирую видео",
-  audio: "Обрабатываю аудио",
-};
+const messages: Record<GenerationLoaderProps['type'], string> = {
+  text: 'Генерирую ответ',
+  image: 'Создаю изображение',
+  video: 'Генерирую видео',
+  audio: 'Обрабатываю аудио',
+}
 
 export function GenerationLoader({ type, model }: GenerationLoaderProps) {
   return (
@@ -30,11 +30,7 @@ export function GenerationLoader({ type, model }: GenerationLoaderProps) {
               className="animate-progress-ring"
             />
           </svg>
-          <div
-            className="absolute inset-0 flex items-center justify-center text-[14px] font-bold gradient-accent-text"
-          >
-            E
-          </div>
+          <div className="absolute inset-0 flex items-center justify-center text-[14px] font-bold gradient-accent-text">E</div>
         </div>
 
         {/* Text */}
@@ -44,7 +40,7 @@ export function GenerationLoader({ type, model }: GenerationLoaderProps) {
             {model && (
               <span
                 className="text-xs font-mono px-2 py-0.5 rounded-full text-muted-foreground"
-                style={{ background: "var(--bg-pill)", border: "1px solid var(--border-primary)" }}
+                style={{ background: 'var(--bg-pill)', border: '1px solid var(--border-primary)' }}
               >
                 {model}
               </span>
@@ -52,11 +48,11 @@ export function GenerationLoader({ type, model }: GenerationLoaderProps) {
           </div>
           <div className="flex items-center gap-1 mt-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--primary))] animate-pulse" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--primary))] animate-pulse" style={{ animationDelay: "150ms" }} />
-            <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--primary))] animate-pulse" style={{ animationDelay: "300ms" }} />
+            <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--primary))] animate-pulse" style={{ animationDelay: '150ms' }} />
+            <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--primary))] animate-pulse" style={{ animationDelay: '300ms' }} />
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

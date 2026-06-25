@@ -1,22 +1,24 @@
-import { Placeholder } from "@/shared/ui/era";
+import { Placeholder } from '@/shared/ui/era'
 
 interface Scenario {
-  name: string;
-  gradient: string;
+  name: string
+  gradient: string
 }
 
 interface ScenariosCarouselProps {
-  title: string;
-  scenarios: Scenario[];
+  title: string
+  scenarios: Scenario[]
 }
 
-const tones: Array<"rust" | "coal" | "ember"> = ["rust", "ember", "coal"];
+const tones: Array<'rust' | 'coal' | 'ember'> = ['rust', 'ember', 'coal']
 
 export function ScenariosCarousel({ title, scenarios }: ScenariosCarouselProps) {
   return (
     <div className="mt-10">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-[18px] font-bold tracking-tight" style={{ color: "var(--text-primary)" }}>{title}</h2>
+        <h2 className="text-[18px] font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          {title}
+        </h2>
         <span className="font-mono text-[11px] uppercase tracking-[0.14em] cursor-pointer text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] transition-colors">
           Все →
         </span>
@@ -32,5 +34,5 @@ export function ScenariosCarousel({ title, scenarios }: ScenariosCarouselProps) 
         ))}
       </div>
     </div>
-  );
+  )
 }

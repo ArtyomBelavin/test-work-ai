@@ -1,31 +1,23 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { formatDistanceToNow } from "date-fns";
-import { ru } from "date-fns/locale";
-import { Copy, Download, RefreshCw, MoreHorizontal, Play, Zap } from "lucide-react";
-import { ModelIcon } from "@/features/model-picker";
-import type { Generation } from "@/entities/generation";
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import { ru } from 'date-fns/locale'
+import { Copy, Download, RefreshCw, MoreHorizontal, Play, Zap } from 'lucide-react'
+import { ModelIcon } from '@/features/model-picker'
+import type { Generation } from '@/entities/generation'
 
 interface Props {
-  generation: Generation;
+  generation: Generation
 }
 
-const ASPECT_CLASS: Record<NonNullable<Generation["aspect"]>, string> = {
-  "1:1": "aspect-square",
-  "16:9": "aspect-video",
-  "9:16": "aspect-[9/16] max-h-[520px]",
-  "4:3": "aspect-[4/3]",
-};
+const ASPECT_CLASS: Record<NonNullable<Generation['aspect']>, string> = {
+  '1:1': 'aspect-square',
+  '16:9': 'aspect-video',
+  '9:16': 'aspect-[9/16] max-h-[520px]',
+  '4:3': 'aspect-[4/3]',
+}
 
-function ActionButton({
-  Icon,
-  label,
-  onClick,
-}: {
-  Icon: typeof Copy;
-  label: string;
-  onClick?: () => void;
-}) {
+function ActionButton({ Icon, label, onClick }: { Icon: typeof Copy; label: string; onClick?: () => void }) {
   return (
     <button
       type="button"
@@ -36,15 +28,15 @@ function ActionButton({
     >
       <Icon size={14} strokeWidth={1.8} />
     </button>
-  );
+  )
 }
 
 function Waveform() {
   // deterministic-ish bars
   const bars = Array.from({ length: 48 }).map((_, i) => {
-    const h = 20 + Math.abs(Math.sin(i * 1.7) * 70) + Math.abs(Math.cos(i * 0.9) * 20);
-    return Math.min(100, Math.round(h));
-  });
+    const h = 20 + Math.abs(Math.sin(i * 1.7) * 70) + Math.abs(Math.cos(i * 0.9) * 20)
+    return Math.min(100, Math.round(h))
+  })
   return (
     <div className="flex items-center gap-[3px] h-12 flex-1">
       {bars.map((h, i) => (
@@ -54,36 +46,30 @@ function Waveform() {
           style={{
             height: `${h}%`,
             background:
-              i < 18
-                ? "linear-gradient(to top, hsl(var(--primary)), #ff7a3d)"
-                : "color-mix(in oklab, hsl(var(--muted-foreground)) 50%, transparent)",
+              i < 18 ? 'linear-gradient(to top, hsl(var(--primary)), #ff7a3d)' : 'color-mix(in oklab, hsl(var(--muted-foreground)) 50%, transparent)',
           }}
         />
       ))}
     </div>
-  );
+  )
 }
 
 export function GenerationCard({ generation }: Props) {
-  const { type, providerId, modelName, credits, prompt, createdAt, text, gradient, aspect, duration } =
-    generation;
+  const { type, providerId, modelName, credits, prompt, createdAt, text, gradient, aspect, duration } = generation
 
-  const [relative, setRelative] = useState(() =>
-    formatDistanceToNow(createdAt, { addSuffix: true, locale: ru }),
-  );
+  const [relative, setRelative] = useState(() => formatDistanceToNow(createdAt, { addSuffix: true, locale: ru }))
   useEffect(() => {
-    const tick = () =>
-      setRelative(formatDistanceToNow(createdAt, { addSuffix: true, locale: ru }));
-    tick();
-    const id = setInterval(tick, 30_000);
-    return () => clearInterval(id);
-  }, [createdAt]);
+    const tick = () => setRelative(formatDistanceToNow(createdAt, { addSuffix: true, locale: ru }))
+    tick()
+    const id = setInterval(tick, 30_000)
+    return () => clearInterval(id)
+  }, [createdAt])
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
       className="group rounded-2xl border border-border bg-card p-4 hover:border-[hsl(var(--border))]/80 transition-colors"
     >
       {/* Header */}
@@ -95,8 +81,8 @@ export function GenerationCard({ generation }: Props) {
         <span
           className="ml-auto inline-flex items-center gap-1 font-mono tabular-nums text-[11px] px-2 py-0.5 rounded-full"
           style={{
-            background: "var(--c-accent-soft)",
-            color: "hsl(var(--primary))",
+            background: 'var(--c-accent-soft)',
+            color: 'hsl(var(--primary))',
           }}
         >
           <Zap size={10} strokeWidth={1.8} />
@@ -108,22 +94,15 @@ export function GenerationCard({ generation }: Props) {
       <p className="text-sm text-foreground/90 line-clamp-2 mb-3">{prompt}</p>
 
       {/* Result */}
-      {type === "text" && text && (
-        <div className="bg-secondary rounded-xl p-3 text-sm text-foreground whitespace-pre-line leading-relaxed">
-          {text}
-        </div>
+      {type === 'text' && text && (
+        <div className="bg-secondary rounded-xl p-3 text-sm text-foreground whitespace-pre-line leading-relaxed">{text}</div>
       )}
 
-      {type === "image" && (
-        <div
-          className={`${ASPECT_CLASS[aspect ?? "1:1"]} w-full rounded-xl overflow-hidden`}
-          style={{ background: gradient }}
-        />
-      )}
+      {type === 'image' && <div className={`${ASPECT_CLASS[aspect ?? '1:1']} w-full rounded-xl overflow-hidden`} style={{ background: gradient }} />}
 
-      {type === "video" && (
+      {type === 'video' && (
         <div
-          className={`${ASPECT_CLASS[aspect ?? "16:9"]} w-full rounded-xl overflow-hidden relative flex items-center justify-center`}
+          className={`${ASPECT_CLASS[aspect ?? '16:9']} w-full rounded-xl overflow-hidden relative flex items-center justify-center`}
           style={{ background: gradient }}
         >
           <div className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
@@ -137,20 +116,18 @@ export function GenerationCard({ generation }: Props) {
         </div>
       )}
 
-      {type === "audio" && (
+      {type === 'audio' && (
         <div className="flex items-center gap-3 rounded-xl px-3 py-3 bg-secondary">
           <button
             type="button"
             className="w-9 h-9 rounded-full flex items-center justify-center text-white shrink-0"
-            style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" }}
+            style={{ background: 'linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)' }}
             aria-label="Воспроизвести"
           >
             <Play size={14} strokeWidth={2} fill="currentColor" />
           </button>
           <Waveform />
-          {duration && (
-            <span className="font-mono tabular-nums text-xs text-muted-foreground shrink-0">{duration}</span>
-          )}
+          {duration && <span className="font-mono tabular-nums text-xs text-muted-foreground shrink-0">{duration}</span>}
         </div>
       )}
 
@@ -162,5 +139,5 @@ export function GenerationCard({ generation }: Props) {
         <ActionButton Icon={MoreHorizontal} label="Ещё" />
       </div>
     </motion.div>
-  );
+  )
 }

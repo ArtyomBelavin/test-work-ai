@@ -1,11 +1,11 @@
-import { httpClient } from "@/shared/api";
-import type { DailyCheckInDto } from "./rewards.dto";
-import { mapDailyCheckInDto, type DailyCheckInStatus } from "./rewards.mapper";
+import { httpClient } from '@/shared/api'
+import type { DailyCheckInDto } from './rewards.dto'
+import { mapDailyCheckInDto, type DailyCheckInStatus } from './rewards.mapper'
 
 const REWARDS_ENDPOINTS = {
-  dailyCheckIn: "/api/rewards/daily-check-in",
-  claimDailyCheckIn: "/api/rewards/daily-check-in/claim",
-} as const;
+  dailyCheckIn: '/api/rewards/daily-check-in',
+  claimDailyCheckIn: '/api/rewards/daily-check-in/claim',
+} as const
 
 const FALLBACK_DAYS = [
   { day: 1, credits: 2 },
@@ -15,7 +15,7 @@ const FALLBACK_DAYS = [
   { day: 5, credits: 4 },
   { day: 6, credits: 4 },
   { day: 7, credits: 15, isBonus: true },
-];
+]
 
 export async function getDailyCheckInStatus(): Promise<DailyCheckInStatus> {
   return httpClient
@@ -28,8 +28,8 @@ export async function getDailyCheckInStatus(): Promise<DailyCheckInStatus> {
         canClaim: true,
         todayRewardCredits: FALLBACK_DAYS[0].credits,
         days: FALLBACK_DAYS,
-      };
-    });
+      }
+    })
 }
 
 export async function claimDailyCheckIn(): Promise<DailyCheckInStatus> {
@@ -44,6 +44,6 @@ export async function claimDailyCheckIn(): Promise<DailyCheckInStatus> {
         todayRewardCredits: FALLBACK_DAYS[0].credits,
         lastCheckInAt: new Date(),
         days: FALLBACK_DAYS,
-      };
-    });
+      }
+    })
 }

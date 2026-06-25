@@ -1,1 +1,1 @@
-export { ThemeProvider, useTheme } from "./model/ThemeContext";
+export { ThemeProvider, useTheme } from './model/ThemeContext'

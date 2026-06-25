@@ -1,33 +1,26 @@
-import { useNavigate } from "@/shared/routing";
+import { useNavigate } from '@/shared/routing'
 // no extra icons needed
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/shared/ui/command";
-import { StatusBadge } from "@/shared/ui/era/StatusBadge";
-import { ModelGlyph } from "@/shared/ui/era/ModelGlyph";
-import { useCommandPalette } from "@/features/command-palette";
-import { searchableModels, modelTypeToRoute, type SearchableModelType } from "@/config/searchableModels";
+import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/shared/ui/command'
+import { StatusBadge } from '@/shared/ui/era/StatusBadge'
+import { ModelGlyph } from '@/shared/ui/era/ModelGlyph'
+import { useCommandPalette } from '@/features/command-palette'
+import { searchableModels, modelTypeToRoute, type SearchableModelType } from '@/config/searchableModels'
 
 const TYPE_LABEL: Record<SearchableModelType, string> = {
-  text: "Текст",
-  image: "Изображения",
-  video: "Видео",
-  audio: "Аудио",
-};
+  text: 'Текст',
+  image: 'Изображения',
+  video: 'Видео',
+  audio: 'Аудио',
+}
 
 export function CommandPalette() {
-  const { open, setOpen } = useCommandPalette();
-  const navigate = useNavigate();
+  const { open, setOpen } = useCommandPalette()
+  const navigate = useNavigate()
 
   const handleSelect = (id: string, type: SearchableModelType) => {
-    setOpen(false);
-    navigate({ to: modelTypeToRoute[type], search: { model: id } as never });
-  };
+    setOpen(false)
+    navigate({ to: modelTypeToRoute[type], search: { model: id } as never })
+  }
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
@@ -65,5 +58,5 @@ export function CommandPalette() {
         <span>esc закрыть</span>
       </div>
     </CommandDialog>
-  );
+  )
 }

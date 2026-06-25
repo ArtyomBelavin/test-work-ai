@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
-import { AuthProvider } from "@/features/auth";
-import { ThemeProvider } from "@/features/theme-switcher";
-import { RouterProvider } from "@/shared/routing";
-import { TooltipProvider } from "@/shared/ui/tooltip";
+import type { ReactNode } from 'react'
+import { AuthProvider } from '@/features/auth'
+import { ThemeProvider } from '@/features/theme-switcher'
+import { RouterProvider } from '@/shared/routing'
+import { TooltipProvider } from '@/shared/ui/tooltip'
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
@@ -13,5 +13,5 @@ export function AppProviders({ children }: { children: ReactNode }) {
         </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>
-  );
+  )
 }

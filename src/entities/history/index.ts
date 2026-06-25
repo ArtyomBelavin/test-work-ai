@@ -1,2 +1,2 @@
-export * from "./api";
-export * from "./model/mock-history";
+export * from './api'
+export * from './model/mock-history'

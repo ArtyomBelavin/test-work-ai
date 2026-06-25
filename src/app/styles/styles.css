@@ -1,7 +1,7 @@
-@import "@fontsource-variable/geist";
-@import "@fontsource-variable/geist-mono";
-@import "tailwindcss";
-@import "tw-animate-css";
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -38,8 +38,8 @@
   --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
-  --font-sans: "Geist Variable", "Manrope", -apple-system, system-ui, sans-serif;
-  --font-mono: "Geist Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: 'Geist Variable', 'Manrope', -apple-system, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
   --font-heading: var(--font-sans);
 }
 
@@ -122,7 +122,7 @@
   --seo-footer-text: var(--text-secondary);
   --seo-footer-heading: #4a3f37;
   --seo-footer-muted: var(--text-tertiary);
-  --seo-gradient-placeholder: linear-gradient(135deg, rgba(232,84,32,0.08), rgba(255,178,122,0.05));
+  --seo-gradient-placeholder: linear-gradient(135deg, rgba(232, 84, 32, 0.08), rgba(255, 178, 122, 0.05));
 
   /* ERA2 raw tokens (light) — used by PromptWindow / ModelPickerPill */
   --c-bg: #f6f3f0;
@@ -135,10 +135,10 @@
   --c-fg-dim: #4a3f37;
   --c-fg-mute: #7a6f66;
   --c-fg-low: #a89d92;
-  --c-accent: #E85420;
+  --c-accent: #e85420;
   --c-accent-2: #ff7a3d;
   --c-accent-soft: #fde3d3;
-  --c-accent-glow: rgba(232,84,32,0.25);
+  --c-accent-glow: rgba(232, 84, 32, 0.25);
   --c-accent-hi: #ffb27a;
 
   /* Light shadows */
@@ -222,7 +222,7 @@
   --seo-footer-text: rgba(246, 239, 233, 0.45);
   --seo-footer-heading: rgba(246, 239, 233, 0.55);
   --seo-footer-muted: var(--text-tertiary);
-  --seo-gradient-placeholder: linear-gradient(135deg, rgba(232,84,32,0.18), rgba(255,178,122,0.08));
+  --seo-gradient-placeholder: linear-gradient(135deg, rgba(232, 84, 32, 0.18), rgba(255, 178, 122, 0.08));
 
   /* ERA2 raw tokens (dark canon) */
   --c-bg: #0e0b0a;
@@ -235,15 +235,15 @@
   --c-fg-dim: #c8beb6;
   --c-fg-mute: #8a7f78;
   --c-fg-low: #5a504a;
-  --c-accent: #E85420;
+  --c-accent: #e85420;
   --c-accent-2: #ff7a3d;
   --c-accent-soft: #3a1a0a;
-  --c-accent-glow: rgba(232,84,32,0.35);
+  --c-accent-glow: rgba(232, 84, 32, 0.35);
   --c-accent-hi: #ffb27a;
 
   /* Dark shadows */
-  --shadow-1: 0 1px 0 rgba(255,255,255,0.04) inset, 0 0 0 1px var(--c-line);
-  --shadow-2: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px var(--c-line);
+  --shadow-1: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 0 0 1px var(--c-line);
+  --shadow-2: 0 30px 80px -30px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--c-line);
   --shadow-glow: 0 0 0 1px var(--c-accent), 0 0 40px -5px var(--c-accent-glow);
   --card-shadow-light: none;
 }
@@ -259,7 +259,10 @@
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     text-wrap: balance;
     font-weight: 600;
   }
@@ -284,15 +287,20 @@
 }
 
 @layer utilities {
-  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 
   /* ERA2 fiery gradient — replaces the old violet-pink gradient */
   .gradient-accent {
-    background: linear-gradient(135deg, #E85420 0%, #ff7a3d 100%);
+    background: linear-gradient(135deg, #e85420 0%, #ff7a3d 100%);
   }
   .gradient-accent-text {
-    background: linear-gradient(92deg, #E85420, #ff7a3d, #ffb27a);
+    background: linear-gradient(92deg, #e85420, #ff7a3d, #ffb27a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -306,52 +314,88 @@
 }
 
 @property --gradient-angle {
-  syntax: "<angle>";
+  syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
 }
 @keyframes gradient-rotate {
-  0% { --gradient-angle: 0deg; }
-  100% { --gradient-angle: 360deg; }
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
 }
 .prompt-animated-border {
   position: relative;
   border-radius: 14px;
   padding: 2px;
-  background: linear-gradient(var(--gradient-angle, 0deg), #E85420, #ff7a3d, #ffb27a, #E85420);
+  background: linear-gradient(var(--gradient-angle, 0deg), #e85420, #ff7a3d, #ffb27a, #e85420);
   animation: gradient-rotate 4s linear infinite;
-  box-shadow: 0 0 30px rgba(232, 84, 32, 0.18), 0 0 60px rgba(255, 122, 61, 0.08);
+  box-shadow:
+    0 0 30px rgba(232, 84, 32, 0.18),
+    0 0 60px rgba(255, 122, 61, 0.08);
 }
 .prompt-animated-border-thin {
   position: relative;
   border-radius: 14px;
   padding: 1px;
-  background: linear-gradient(var(--gradient-angle, 0deg), rgba(232,84,32,0.6), rgba(255,122,61,0.4), rgba(255,178,122,0.6), rgba(232,84,32,0.6));
+  background: linear-gradient(
+    var(--gradient-angle, 0deg),
+    rgba(232, 84, 32, 0.6),
+    rgba(255, 122, 61, 0.4),
+    rgba(255, 178, 122, 0.6),
+    rgba(232, 84, 32, 0.6)
+  );
   animation: gradient-rotate 6s linear infinite;
 }
 
 @layer utilities {
-  .era-ph-rust  { background: repeating-linear-gradient(135deg, #2a130a 0 14px, #1a0b05 14px 28px); }
-  .era-ph-coal  { background: repeating-linear-gradient(135deg, #15120f 0 14px, #0c0a08 14px 28px); }
-  .era-ph-ember { background: repeating-linear-gradient(135deg, #3a1a0a 0 14px, #210d04 14px 28px); }
+  .era-ph-rust {
+    background: repeating-linear-gradient(135deg, #2a130a 0 14px, #1a0b05 14px 28px);
+  }
+  .era-ph-coal {
+    background: repeating-linear-gradient(135deg, #15120f 0 14px, #0c0a08 14px 28px);
+  }
+  .era-ph-ember {
+    background: repeating-linear-gradient(135deg, #3a1a0a 0 14px, #210d04 14px 28px);
+  }
 }
 
 .scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--border)) transparent;
 }
-.scrollbar-thin::-webkit-scrollbar { width: 4px; }
-.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-.scrollbar-thin::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 4px; }
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .animate-fade-in-up {
@@ -370,14 +414,20 @@ body:not(.dark) {
 
 /* ─── Animated border glow during generation ─── */
 @keyframes borderGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .glow-border-active {
   padding: 2px;
-  background: linear-gradient(90deg, #E85420, #ff7a3d, #ffb088, #ff7a3d, #E85420);
+  background: linear-gradient(90deg, #e85420, #ff7a3d, #ffb088, #ff7a3d, #e85420);
   background-size: 300% 100%;
   animation: borderGlow 3s ease infinite;
   border-radius: var(--radius-lg, 22px);
@@ -392,8 +442,12 @@ body:not(.dark) {
 
 /* ─── Generation progress ring ─── */
 @keyframes progressRing {
-  0% { stroke-dashoffset: 107; }
-  100% { stroke-dashoffset: 0; }
+  0% {
+    stroke-dashoffset: 107;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 .animate-progress-ring {
@@ -402,11 +456,21 @@ body:not(.dark) {
 
 /* ─── Gradient mesh background ─── */
 @keyframes meshFloat {
-  0% { background-position: 0% 0%; }
-  25% { background-position: 100% 0%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 0%; }
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 .mesh-background {
@@ -414,7 +478,7 @@ body:not(.dark) {
 }
 
 .mesh-background::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;

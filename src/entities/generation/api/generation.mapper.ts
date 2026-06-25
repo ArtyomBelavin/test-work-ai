@@ -1,5 +1,5 @@
-import type { Generation } from "../model/mock-generations";
-import type { GenerationDto } from "./generation.dto";
+import type { Generation } from '../model/mock-generations'
+import type { GenerationDto } from './generation.dto'
 
 export function mapGenerationDto(dto: GenerationDto): Generation {
   return {
@@ -14,5 +14,5 @@ export function mapGenerationDto(dto: GenerationDto): Generation {
     gradient: dto.gradient,
     aspect: dto.aspect,
     duration: dto.duration,
-  };
+  }
 }

@@ -1,11 +1,11 @@
-import { Plus, Zap, Sparkles } from "lucide-react";
+import { Plus, Zap, Sparkles } from 'lucide-react'
 
 interface StickyBottomPromptProps {
-  prompt: string;
-  onPromptChange: (v: string) => void;
-  selectedModel: string;
-  credits?: number;
-  onGenerate: () => void;
+  prompt: string
+  onPromptChange: (v: string) => void
+  selectedModel: string
+  credits?: number
+  onGenerate: () => void
 }
 
 export function StickyBottomPrompt({ prompt, onPromptChange, selectedModel, credits = 2, onGenerate }: StickyBottomPromptProps) {
@@ -30,9 +30,11 @@ export function StickyBottomPrompt({ prompt, onPromptChange, selectedModel, cred
           className="inline-flex items-center gap-1 px-4 h-9 rounded-full gradient-accent text-white text-sm font-semibold shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] disabled:opacity-50"
         >
           <Sparkles size={12} />
-          <span className="font-mono tabular-nums inline-flex items-center gap-1"><Zap size={12} /> {credits}</span>
+          <span className="font-mono tabular-nums inline-flex items-center gap-1">
+            <Zap size={12} /> {credits}
+          </span>
         </button>
       </div>
     </div>
-  );
+  )
 }

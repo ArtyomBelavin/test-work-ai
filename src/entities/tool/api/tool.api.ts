@@ -1,15 +1,15 @@
-import { httpClient, type ApiListDto } from "@/shared/api";
-import { getToolPageData, toolPages, type ToolPageData } from "../model/tool-pages";
-import type { ToolPageDto } from "./tool.dto";
-import { mapToolPageDto } from "./tool.mapper";
+import { httpClient, type ApiListDto } from '@/shared/api'
+import { getToolPageData, toolPages, type ToolPageData } from '../model/tool-pages'
+import type { ToolPageDto } from './tool.dto'
+import { mapToolPageDto } from './tool.mapper'
 
 const TOOL_ENDPOINTS = {
-  list: "/api/tools",
+  list: '/api/tools',
   detail: (slug: string) => `/api/tools/${encodeURIComponent(slug)}`,
-} as const;
+} as const
 
 function unwrapList<T>(response: T[] | ApiListDto<T>): T[] {
-  return Array.isArray(response) ? response : response.data;
+  return Array.isArray(response) ? response : response.data
 }
 
 export async function getToolPages(): Promise<ToolPageData[]> {
@@ -18,8 +18,8 @@ export async function getToolPages(): Promise<ToolPageData[]> {
     .then((response) => unwrapList(response).map(mapToolPageDto))
     .catch(() => {
       // TODO(backend): Temporary fallback until /api/tools is available.
-      return toolPages;
-    });
+      return toolPages
+    })
 }
 
 export async function getToolPage(slug: string): Promise<ToolPageData | undefined> {
@@ -28,6 +28,6 @@ export async function getToolPage(slug: string): Promise<ToolPageData | undefine
     .then(mapToolPageDto)
     .catch(() => {
       // TODO(backend): Temporary fallback until /api/tools/:slug is available.
-      return getToolPageData(slug);
-    });
+      return getToolPageData(slug)
+    })
 }

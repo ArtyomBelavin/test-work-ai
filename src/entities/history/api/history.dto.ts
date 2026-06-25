@@ -1,13 +1,13 @@
-import type { GenerationDto } from "@/entities/generation/api/generation.dto";
-import type { QueryKeyParams } from "@/shared/api";
-import type { GenType } from "@/entities/generation";
+import type { GenerationDto } from '@/entities/generation/api/generation.dto'
+import type { QueryKeyParams } from '@/shared/api'
+import type { GenType } from '@/entities/generation'
 
 export interface HistoryItemDto extends GenerationDto {
-  favorite?: boolean;
+  favorite?: boolean
 }
 
 export interface HistoryListQueryDto extends QueryKeyParams {
-  type?: GenType;
-  favorite?: boolean;
-  limit?: number;
+  type?: GenType
+  favorite?: boolean
+  limit?: number
 }

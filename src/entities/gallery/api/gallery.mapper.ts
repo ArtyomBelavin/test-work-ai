@@ -1,17 +1,17 @@
-import type { GalleryCollectionDto, GalleryItemDto, GalleryCollectionType } from "./gallery.dto";
+import type { GalleryCollectionDto, GalleryItemDto, GalleryCollectionType } from './gallery.dto'
 
 export interface GalleryItem {
-  id: string;
-  collection: GalleryCollectionType;
-  imageUrl: string;
-  title?: string;
-  prompt?: string;
+  id: string
+  collection: GalleryCollectionType
+  imageUrl: string
+  title?: string
+  prompt?: string
 }
 
 export interface GalleryCollection {
-  id: GalleryCollectionType;
-  title: string;
-  items: GalleryItem[];
+  id: GalleryCollectionType
+  title: string
+  items: GalleryItem[]
 }
 
 export function mapGalleryItemDto(dto: GalleryItemDto): GalleryItem {
@@ -21,7 +21,7 @@ export function mapGalleryItemDto(dto: GalleryItemDto): GalleryItem {
     imageUrl: dto.image_url,
     title: dto.title,
     prompt: dto.prompt,
-  };
+  }
 }
 
 export function mapGalleryCollectionDto(dto: GalleryCollectionDto): GalleryCollection {
@@ -29,5 +29,5 @@ export function mapGalleryCollectionDto(dto: GalleryCollectionDto): GalleryColle
     id: dto.id,
     title: dto.title,
     items: dto.items.map(mapGalleryItemDto),
-  };
+  }
 }

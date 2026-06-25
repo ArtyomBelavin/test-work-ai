@@ -1,14 +1,14 @@
-import { httpClient, type ApiListDto } from "@/shared/api";
-import { MOCK_HISTORY, type HistoryItem } from "../model/mock-history";
-import type { HistoryItemDto, HistoryListQueryDto } from "./history.dto";
-import { mapHistoryItemDto } from "./history.mapper";
+import { httpClient, type ApiListDto } from '@/shared/api'
+import { MOCK_HISTORY, type HistoryItem } from '../model/mock-history'
+import type { HistoryItemDto, HistoryListQueryDto } from './history.dto'
+import { mapHistoryItemDto } from './history.mapper'
 
 const HISTORY_ENDPOINTS = {
-  list: "/api/history",
-} as const;
+  list: '/api/history',
+} as const
 
 function unwrapList<T>(response: T[] | ApiListDto<T>): T[] {
-  return Array.isArray(response) ? response : response.data;
+  return Array.isArray(response) ? response : response.data
 }
 
 export async function getHistoryItems(query: HistoryListQueryDto = {}): Promise<HistoryItem[]> {
@@ -18,10 +18,10 @@ export async function getHistoryItems(query: HistoryListQueryDto = {}): Promise<
     .catch(() => {
       // TODO(backend): Temporary fallback until /api/history is available.
       const filtered = MOCK_HISTORY.filter((item) => {
-        if (query.type && item.type !== query.type) return false;
-        if (query.favorite !== undefined && Boolean(item.favorite) !== query.favorite) return false;
-        return true;
-      });
-      return typeof query.limit === "number" ? filtered.slice(0, query.limit) : filtered;
-    });
+        if (query.type && item.type !== query.type) return false
+        if (query.favorite !== undefined && Boolean(item.favorite) !== query.favorite) return false
+        return true
+      })
+      return typeof query.limit === 'number' ? filtered.slice(0, query.limit) : filtered
+    })
 }

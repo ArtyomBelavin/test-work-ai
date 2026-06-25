@@ -1,13 +1,13 @@
-import type { AccountProfileDto } from "./account.dto";
+import type { AccountProfileDto } from './account.dto'
 
 export interface AccountProfile {
-  id: string;
-  name: string;
-  email: string;
-  planCode: "FREE" | "PRO";
-  creditsUsed: number;
-  creditsTotal: number;
-  estimatedGenerationsLeft?: number;
+  id: string
+  name: string
+  email: string
+  planCode: 'FREE' | 'PRO'
+  creditsUsed: number
+  creditsTotal: number
+  estimatedGenerationsLeft?: number
 }
 
 export function mapAccountProfileDto(dto: AccountProfileDto): AccountProfile {
@@ -19,5 +19,5 @@ export function mapAccountProfileDto(dto: AccountProfileDto): AccountProfile {
     creditsUsed: dto.credits_used,
     creditsTotal: dto.credits_total,
     estimatedGenerationsLeft: dto.estimated_generations_left,
-  };
+  }
 }

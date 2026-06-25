@@ -1,31 +1,31 @@
-import type { SearchableModelType } from "@/config/searchableModels";
-import type { UseCaseType } from "@/config/useCases";
-import type { PromoBannerDto, SearchableModelDto, UseCaseDto } from "./content.dto";
+import type { SearchableModelType } from '@/config/searchableModels'
+import type { UseCaseType } from '@/config/useCases'
+import type { PromoBannerDto, SearchableModelDto, UseCaseDto } from './content.dto'
 
 export interface ContentSearchableModel {
-  id: string;
-  name: string;
-  provider: string;
-  type: SearchableModelType;
-  credits: string;
-  icon?: string;
-  isNew?: boolean;
-  route: string;
+  id: string
+  name: string
+  provider: string
+  type: SearchableModelType
+  credits: string
+  icon?: string
+  isNew?: boolean
+  route: string
 }
 
 export interface ContentUseCase {
-  id: string;
-  type: UseCaseType;
-  label: string;
-  prompt: string;
-  iconKey: string;
+  id: string
+  type: UseCaseType
+  label: string
+  prompt: string
+  iconKey: string
 }
 
 export interface PromoBanner {
-  isActive: boolean;
-  label: string;
-  text: string;
-  route: string;
+  isActive: boolean
+  label: string
+  text: string
+  route: string
 }
 
 export function mapSearchableModelDto(dto: SearchableModelDto): ContentSearchableModel {
@@ -38,7 +38,7 @@ export function mapSearchableModelDto(dto: SearchableModelDto): ContentSearchabl
     icon: dto.icon,
     isNew: dto.is_new,
     route: dto.route,
-  };
+  }
 }
 
 export function mapUseCaseDto(dto: UseCaseDto): ContentUseCase {
@@ -48,7 +48,7 @@ export function mapUseCaseDto(dto: UseCaseDto): ContentUseCase {
     label: dto.label,
     prompt: dto.prompt,
     iconKey: dto.icon_key,
-  };
+  }
 }
 
 export function mapPromoBannerDto(dto: PromoBannerDto): PromoBanner {
@@ -57,5 +57,5 @@ export function mapPromoBannerDto(dto: PromoBannerDto): PromoBanner {
     label: dto.label,
     text: dto.text,
     route: dto.route,
-  };
+  }
 }

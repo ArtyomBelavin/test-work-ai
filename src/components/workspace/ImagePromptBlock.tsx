@@ -1,70 +1,87 @@
-import { Zap, Sparkles, Image as ImageIcon, Hash, Gem } from "lucide-react";
-import { TwoPanelModelSelector, InlinePillDropdown } from "@/features/model-picker";
-import { AttachmentButton } from "@/shared/ui/era";
-import type { ImageProvider } from "@/entities/ai-model";
+import { Zap, Sparkles, Image as ImageIcon, Hash, Gem } from 'lucide-react'
+import { TwoPanelModelSelector, InlinePillDropdown } from '@/features/model-picker'
+import { AttachmentButton } from '@/shared/ui/era'
+import type { ImageProvider } from '@/entities/ai-model'
 
 const ASPECT_DESC: Record<string, string> = {
-  "1:1": "Квадрат",
-  "16:9": "Горизонтальный",
-  "9:16": "Вертикальный",
-  "4:3": "Классический",
-  "3:4": "Портретный",
-  "3:2": "Фото",
-  "2:3": "Портрет",
-  "21:9": "Кинематограф",
-  "4:5": "Соцсети",
-  "5:4": "Альбом",
-  "auto": "Авто",
-};
+  '1:1': 'Квадрат',
+  '16:9': 'Горизонтальный',
+  '9:16': 'Вертикальный',
+  '4:3': 'Классический',
+  '3:4': 'Портретный',
+  '3:2': 'Фото',
+  '2:3': 'Портрет',
+  '21:9': 'Кинематограф',
+  '4:5': 'Соцсети',
+  '5:4': 'Альбом',
+  auto: 'Авто',
+}
 
 const QUALITY_DESC: Record<string, string> = {
-  "1K": "Быстрая генерация",
-  "2K": "Баланс качества",
-  "4K": "Максимальная детализация",
-};
+  '1K': 'Быстрая генерация',
+  '2K': 'Баланс качества',
+  '4K': 'Максимальная детализация',
+}
 
 interface PromptBlockImageProps {
-  prompt: string;
-  onPromptChange: (v: string) => void;
-  providers: ImageProvider[];
-  selectedProviderId: string;
-  selectedSubModelId: string;
-  onModelSelect: (providerId: string, subModelId: string) => void;
-  aspectRatio: string;
-  onAspectSelect: (r: string) => void;
-  quantity: number;
-  onQuantityChange: (n: number) => void;
-  quality: string;
-  onQualityChange: (q: string) => void;
-  turbo: boolean;
-  onTurboToggle: () => void;
-  onGenerate: () => void;
-  modelTriggerRef?: React.RefObject<HTMLButtonElement | null>;
+  prompt: string
+  onPromptChange: (v: string) => void
+  providers: ImageProvider[]
+  selectedProviderId: string
+  selectedSubModelId: string
+  onModelSelect: (providerId: string, subModelId: string) => void
+  aspectRatio: string
+  onAspectSelect: (r: string) => void
+  quantity: number
+  onQuantityChange: (n: number) => void
+  quality: string
+  onQualityChange: (q: string) => void
+  turbo: boolean
+  onTurboToggle: () => void
+  onGenerate: () => void
+  modelTriggerRef?: React.RefObject<HTMLButtonElement | null>
 }
 
 export function PromptBlock({
-  prompt, onPromptChange,
-  providers, selectedProviderId, selectedSubModelId, onModelSelect,
-  aspectRatio, onAspectSelect,
-  quantity, onQuantityChange,
-  quality, onQualityChange,
-  turbo, onTurboToggle,
+  prompt,
+  onPromptChange,
+  providers,
+  selectedProviderId,
+  selectedSubModelId,
+  onModelSelect,
+  aspectRatio,
+  onAspectSelect,
+  quantity,
+  onQuantityChange,
+  quality,
+  onQualityChange,
+  turbo,
+  onTurboToggle,
   onGenerate,
   modelTriggerRef,
 }: PromptBlockImageProps) {
-  const provider = providers.find((p) => p.id === selectedProviderId);
-  const subModel = provider?.subModels.find((s) => s.id === selectedSubModelId);
-  const credits = subModel?.credits ?? 0;
+  const provider = providers.find((p) => p.id === selectedProviderId)
+  const subModel = provider?.subModels.find((s) => s.id === selectedSubModelId)
+  const credits = subModel?.credits ?? 0
 
-  if (!provider) return null;
+  if (!provider) return null
 
   const selectorProviders = providers.map((p) => ({
-    id: p.id, name: p.name, icon: p.icon, badge: p.badge,
+    id: p.id,
+    name: p.name,
+    icon: p.icon,
+    badge: p.badge,
     subModels: p.subModels.map((s) => ({
-      id: s.id, name: s.name, credits: s.credits, isNew: s.isNew, isDefault: s.isDefault, badge: s.badge,
-      desc: s.desc, time: s.time,
+      id: s.id,
+      name: s.name,
+      credits: s.credits,
+      isNew: s.isNew,
+      isDefault: s.isDefault,
+      badge: s.badge,
+      desc: s.desc,
+      time: s.time,
     })),
-  }));
+  }))
 
   return (
     <div className="rounded-[22px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-3 sm:p-4 w-full transition-all duration-200 has-[textarea:focus]:border-[hsl(var(--primary))] has-[textarea:focus]:shadow-[0_0_0_3px_rgba(232,84,32,0.18),0_2px_8px_rgba(20,11,5,0.1)]">
@@ -129,14 +146,14 @@ export function PromptBlock({
             type="button"
             onClick={onTurboToggle}
             className={
-              "inline-flex items-center gap-1.5 px-3 h-9 rounded-full text-[12px] font-medium border transition-all " +
+              'inline-flex items-center gap-1.5 px-3 h-9 rounded-full text-[12px] font-medium border transition-all ' +
               (turbo
-                ? "bg-[hsl(var(--primary))]/15 border-[hsl(var(--primary))]/40 text-[hsl(var(--primary))]"
-                : "bg-[hsl(var(--secondary))] border-[hsl(var(--border))] text-[hsl(var(--foreground))]")
+                ? 'bg-[hsl(var(--primary))]/15 border-[hsl(var(--primary))]/40 text-[hsl(var(--primary))]'
+                : 'bg-[hsl(var(--secondary))] border-[hsl(var(--border))] text-[hsl(var(--foreground))]')
             }
           >
             <Zap className="w-3.5 h-3.5" />
-            <span className="font-mono tabular-nums leading-none">{turbo ? "ON" : "OFF"}</span>
+            <span className="font-mono tabular-nums leading-none">{turbo ? 'ON' : 'OFF'}</span>
           </button>
         )}
 
@@ -152,5 +169,5 @@ export function PromptBlock({
         </button>
       </div>
     </div>
-  );
+  )
 }

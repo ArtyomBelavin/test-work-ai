@@ -1,2 +1,2 @@
-export * from "./api";
-export { GenerationLoader } from "./ui/GenerationLoader";
+export * from './api'
+export { GenerationLoader } from './ui/GenerationLoader'

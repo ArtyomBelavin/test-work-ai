@@ -1,8 +1,8 @@
-import type { AIModel, SubModel } from "../model/models";
-import type { ImageProvider, ImageSubModel } from "../model/image-models";
-import type { TextProvider, TextSubModel } from "../model/text-models";
-import type { VideoProvider, VideoSubModel } from "../model/video-models";
-import type { AiModelDto, AiProviderDto, AiSubModelDto } from "./ai-model.dto";
+import type { AIModel, SubModel } from '../model/models'
+import type { ImageProvider, ImageSubModel } from '../model/image-models'
+import type { TextProvider, TextSubModel } from '../model/text-models'
+import type { VideoProvider, VideoSubModel } from '../model/video-models'
+import type { AiModelDto, AiProviderDto, AiSubModelDto } from './ai-model.dto'
 
 export function mapAiSubModelDto(dto: AiSubModelDto): SubModel {
   return {
@@ -10,7 +10,7 @@ export function mapAiSubModelDto(dto: AiSubModelDto): SubModel {
     name: dto.display_name,
     credits: dto.credits,
     isNew: dto.is_new,
-  };
+  }
 }
 
 export function mapAiModelDto(dto: AiModelDto): AIModel {
@@ -25,7 +25,7 @@ export function mapAiModelDto(dto: AiModelDto): AIModel {
     icon: dto.icon,
     isNew: dto.is_new,
     slug: dto.slug,
-  };
+  }
 }
 
 export function mapTextProviderDto(dto: AiProviderDto): TextProvider {
@@ -38,10 +38,10 @@ export function mapTextProviderDto(dto: AiProviderDto): TextProvider {
       name: subModel.display_name,
       credits: subModel.credits,
       badge: subModel.badge,
-      description: subModel.description ?? "",
+      description: subModel.description ?? '',
       isNew: subModel.is_new,
     })),
-  };
+  }
 }
 
 export function mapImageProviderDto(dto: AiProviderDto): ImageProvider {
@@ -51,7 +51,7 @@ export function mapImageProviderDto(dto: AiProviderDto): ImageProvider {
     icon: dto.icon,
     badge: dto.badge,
     badgeColor: dto.badge_color,
-    description: dto.description ?? "",
+    description: dto.description ?? '',
     subModels: dto.sub_models.map<ImageSubModel>((subModel) => ({
       id: subModel.id,
       name: subModel.display_name,
@@ -69,7 +69,7 @@ export function mapImageProviderDto(dto: AiProviderDto): ImageProvider {
     hasTurbo: dto.has_turbo,
     hasAdvanced: dto.has_advanced,
     styles: dto.styles,
-  };
+  }
 }
 
 export function mapVideoProviderDto(dto: AiProviderDto): VideoProvider {
@@ -93,5 +93,5 @@ export function mapVideoProviderDto(dto: AiProviderDto): VideoProvider {
     resolutionOptions: dto.resolution_options ?? [],
     qualityOptions: dto.quality_options,
     functions: dto.functions,
-  };
+  }
 }

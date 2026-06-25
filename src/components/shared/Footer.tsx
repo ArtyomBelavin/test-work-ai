@@ -1,49 +1,44 @@
-import { Link } from "@/shared/routing";
-import { Send, Youtube, Twitter } from "lucide-react";
+import { Link } from '@/shared/routing'
+import { Send, Youtube, Twitter } from 'lucide-react'
 
 const productLinks = [
-  { label: "Главная", to: "/" },
-  { label: "Текст", to: "/tools/text-generation" },
-  { label: "Изображения", to: "/tools/image-generation" },
-  { label: "Видео", to: "/tools/video-generation" },
-  { label: "Аудио", to: "/tools/audio-generation" },
-  { label: "Агенты", to: "/tools/agents" },
-  { label: "Тарифы", to: "/pricing" },
-];
+  { label: 'Главная', to: '/' },
+  { label: 'Текст', to: '/tools/text-generation' },
+  { label: 'Изображения', to: '/tools/image-generation' },
+  { label: 'Видео', to: '/tools/video-generation' },
+  { label: 'Аудио', to: '/tools/audio-generation' },
+  { label: 'Агенты', to: '/tools/agents' },
+  { label: 'Тарифы', to: '/pricing' },
+]
 
 const resourcesLinks = [
-  { label: "Документация", to: "#" },
-  { label: "История изменений", to: "#" },
-  { label: "FAQ", to: "#" },
-];
+  { label: 'Документация', to: '#' },
+  { label: 'История изменений', to: '#' },
+  { label: 'FAQ', to: '#' },
+]
 
 const companyLinks = [
-  { label: "О нас", to: "#" },
-  { label: "Контакты", to: "#" },
-  { label: "Поддержка", to: "#" },
-  { label: "Telegram-канал", to: "#" },
-];
+  { label: 'О нас', to: '#' },
+  { label: 'Контакты', to: '#' },
+  { label: 'Поддержка', to: '#' },
+  { label: 'Telegram-канал', to: '#' },
+]
 
 function FooterColumn({ title, links }: { title: string; links: { label: string; to: string }[] }) {
   return (
     <div>
-      <h4 className="mb-4 font-mono text-[11px] uppercase tracking-[0.14em] text-[hsl(var(--muted-foreground))]">
-        {title}
-      </h4>
+      <h4 className="mb-4 font-mono text-[11px] uppercase tracking-[0.14em] text-[hsl(var(--muted-foreground))]">{title}</h4>
       <ul className="space-y-2.5">
         {links.map((link) => (
           <li key={link.label}>
-            <Link
-              to={link.to}
-              className="text-sm text-[hsl(var(--foreground))] hover:text-[#ff7a3d] transition-colors"
-            >
+            <Link to={link.to} className="text-sm text-[hsl(var(--foreground))] hover:text-[#ff7a3d] transition-colors">
               {link.label}
             </Link>
           </li>
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
 export function Footer() {
@@ -59,16 +54,16 @@ export function Footer() {
                 width: 32,
                 height: 32,
                 borderRadius: 8,
-                background: "linear-gradient(135deg, #E85420, #ff7a3d)",
+                background: 'linear-gradient(135deg, #E85420, #ff7a3d)',
                 fontSize: 18,
-                letterSpacing: "-0.02em",
-                boxShadow: "0 2px 8px rgba(232, 84, 32, 0.3)",
+                letterSpacing: '-0.02em',
+                boxShadow: '0 2px 8px rgba(232, 84, 32, 0.3)',
               }}
             >
               E
             </span>
-            <span className="text-[20px] font-semibold tracking-tight" style={{ color: "var(--c-fg)" }}>
-              era<span style={{ color: "var(--c-accent-2)" }}>2</span>
+            <span className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--c-fg)' }}>
+              era<span style={{ color: 'var(--c-accent-2)' }}>2</span>
             </span>
           </Link>
           <p className="mt-4 text-sm text-[hsl(var(--muted-foreground))] max-w-[320px] leading-relaxed">
@@ -76,9 +71,9 @@ export function Footer() {
           </p>
           <div className="flex gap-2 mt-5">
             {[
-              { Icon: Send, label: "Telegram" },
-              { Icon: Youtube, label: "YouTube" },
-              { Icon: Twitter, label: "X" },
+              { Icon: Send, label: 'Telegram' },
+              { Icon: Youtube, label: 'YouTube' },
+              { Icon: Twitter, label: 'X' },
             ].map(({ Icon, label }) => (
               <a
                 key={label}
@@ -102,19 +97,17 @@ export function Footer() {
           <span className="flex items-center gap-2 text-[hsl(var(--muted-foreground))]">
             <span
               className="flex items-center justify-center font-bold text-white select-none"
-              style={{ width: 20, height: 20, borderRadius: 5, background: "linear-gradient(135deg, #E85420, #ff7a3d)", fontSize: 11 }}
+              style={{ width: 20, height: 20, borderRadius: 5, background: 'linear-gradient(135deg, #E85420, #ff7a3d)', fontSize: 11 }}
             >
               E
             </span>
             <span className="text-xs">
-              © 2026 era<span style={{ color: "var(--c-accent-2)" }}>2</span>.ai
+              © 2026 era<span style={{ color: 'var(--c-accent-2)' }}>2</span>.ai
             </span>
           </span>
-          <span className="font-mono text-xs text-[hsl(var(--muted-foreground))]">
-            v1.0.0
-          </span>
+          <span className="font-mono text-xs text-[hsl(var(--muted-foreground))]">v1.0.0</span>
         </div>
       </div>
     </footer>
-  );
+  )
 }

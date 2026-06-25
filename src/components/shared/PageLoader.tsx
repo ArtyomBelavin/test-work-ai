@@ -1,4 +1,4 @@
-import { Skeleton } from "@/shared/ui/skeleton";
+import { Skeleton } from '@/shared/ui/skeleton'
 
 export function PageLoader() {
   return (
@@ -23,5 +23,5 @@ export function PageLoader() {
         </div>
       </div>
     </div>
-  );
+  )
 }

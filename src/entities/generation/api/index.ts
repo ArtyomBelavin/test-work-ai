@@ -1,3 +1,3 @@
-export * from "./generation.api";
-export * from "./generation.dto";
-export * from "./generation.mapper";
+export * from './generation.api'
+export * from './generation.dto'
+export * from './generation.mapper'

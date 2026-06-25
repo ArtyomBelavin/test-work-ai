@@ -1,17 +1,17 @@
-import type { DailyCheckInDto, DailyRewardDayDto } from "./rewards.dto";
+import type { DailyCheckInDto, DailyRewardDayDto } from './rewards.dto'
 
 export interface DailyRewardDay {
-  day: number;
-  credits: number;
-  isBonus?: boolean;
+  day: number
+  credits: number
+  isBonus?: boolean
 }
 
 export interface DailyCheckInStatus {
-  currentStreak: number;
-  canClaim: boolean;
-  todayRewardCredits: number;
-  lastCheckInAt?: Date;
-  days: DailyRewardDay[];
+  currentStreak: number
+  canClaim: boolean
+  todayRewardCredits: number
+  lastCheckInAt?: Date
+  days: DailyRewardDay[]
 }
 
 export function mapDailyRewardDayDto(dto: DailyRewardDayDto): DailyRewardDay {
@@ -19,7 +19,7 @@ export function mapDailyRewardDayDto(dto: DailyRewardDayDto): DailyRewardDay {
     day: dto.day,
     credits: dto.credits,
     isBonus: dto.is_bonus,
-  };
+  }
 }
 
 export function mapDailyCheckInDto(dto: DailyCheckInDto): DailyCheckInStatus {
@@ -29,5 +29,5 @@ export function mapDailyCheckInDto(dto: DailyCheckInDto): DailyCheckInStatus {
     todayRewardCredits: dto.today_reward_credits,
     lastCheckInAt: dto.last_checkin_at ? new Date(dto.last_checkin_at) : undefined,
     days: dto.days.map(mapDailyRewardDayDto),
-  };
+  }
 }

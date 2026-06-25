@@ -1,12 +1,12 @@
-import type { UseCase } from "@/config/useCases";
+import type { UseCase } from '@/config/useCases'
 
 interface Props {
-  useCase: UseCase;
-  onClick: (prompt: string) => void;
+  useCase: UseCase
+  onClick: (prompt: string) => void
 }
 
 export function UseCaseChip({ useCase, onClick }: Props) {
-  const { Icon, label, prompt } = useCase;
+  const { Icon, label, prompt } = useCase
   return (
     <button
       type="button"
@@ -16,5 +16,5 @@ export function UseCaseChip({ useCase, onClick }: Props) {
       <Icon size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
       <span>{label}</span>
     </button>
-  );
+  )
 }
