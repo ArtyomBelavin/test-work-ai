@@ -15,7 +15,7 @@ interface HeaderProps {
   showBurger?: boolean
 }
 
-const iconBtn =
+const classNameIconBtn =
   'relative w-9 h-9 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:bg-card transition-colors flex items-center justify-center'
 
 export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
@@ -77,7 +77,7 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
             <span>Поиск моделей</span>
             <span className="bg-card rounded-md px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground">⌘K</span>
           </button>
-          <button onClick={() => setOpen(true)} className={cn(iconBtn, 'md:hidden')} aria-label="Поиск">
+          <button onClick={() => setOpen(true)} className={cn(classNameIconBtn, 'md:hidden')} aria-label="Поиск">
             <Search className="h-4 w-4" />
           </button>
 
@@ -106,7 +106,7 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
           {isAuthed && <NotificationsDropdown />}
 
           {/* Theme */}
-          <button onClick={toggleTheme} className={iconBtn} aria-label="Переключить тему">
+          <button onClick={toggleTheme} className={classNameIconBtn} aria-label="Переключить тему">
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
 

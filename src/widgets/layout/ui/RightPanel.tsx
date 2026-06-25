@@ -4,11 +4,7 @@ import { Settings2, X, ChevronUp, ChevronDown, RotateCcw, Film, Image as ImageIc
 import { getModelsByCategory, type AIModel } from '@/entities/ai-model'
 import { ModelGlyph } from '@/shared/ui/era/ModelGlyph'
 import { cn } from '@/shared/lib/utils'
-
-interface RightPanelProps {
-  open: boolean
-  onClose: () => void
-}
+import { RightPanelState, RightPanelProps } from '../model'
 
 const imageAspectRatios = ['16:9', '4:3', '1:1', '3:4', '9:16', '21:9'] as const
 const videoAspectRatios = ['16:9', '4:3', '1:1', '3:4', '9:16', '21:9'] as const
@@ -28,53 +24,84 @@ const klingFunctions = [
   'Kling Motion',
 ]
 
+const createInitialState = (models: AIModel[]): RightPanelState => ({
+  selectedModel: models[0],
+  selectedSubIndex: 0,
+  aspectRatio: '4:3',
+  resolution: '2K',
+  videoDuration: '5s',
+  videoRes: '720p',
+  videoQuality: 'Стандарт',
+  klingFunc: klingFunctions[0],
+  formatOpen: true,
+  qualityOpen: true,
+  durationOpen: true,
+  sceneOpen: false,
+  modelDropdownOpen: false,
+  versionDropdownOpen: false,
+  funcDropdownOpen: false,
+})
+
 export function RightPanel({ open, onClose }: RightPanelProps) {
   const location = useLocation()
   const isVideo = location.pathname === '/video'
   const isDesign = location.pathname === '/design'
 
   const models = getModelsByCategory(isVideo ? 'video' : 'image')
-  const [selectedModel, setSelectedModel] = useState<AIModel>(models[0])
-  const [selectedSubIndex, setSelectedSubIndex] = useState(0)
-  const [aspectRatio, setAspectRatio] = useState('4:3')
-  const [resolution, setResolution] = useState('2K')
-  const [videoDuration, setVideoDuration] = useState('5s')
-  const [videoRes, setVideoRes] = useState('720p')
-  const [videoQuality, setVideoQuality] = useState('Стандарт')
-  const [klingFunc, setKlingFunc] = useState(klingFunctions[0])
+  const [panelState, setPanelState] = useState<RightPanelState>(() => createInitialState(models))
 
-  const [formatOpen, setFormatOpen] = useState(true)
-  const [qualityOpen, setQualityOpen] = useState(true)
-  const [durationOpen, setDurationOpen] = useState(true)
-  const [sceneOpen, setSceneOpen] = useState(false)
-  const [modelDropdownOpen, setModelDropdownOpen] = useState(false)
-  const [versionDropdownOpen, setVersionDropdownOpen] = useState(false)
-  const [funcDropdownOpen, setFuncDropdownOpen] = useState(false)
+  const updatePanelState = (patch: Partial<RightPanelState>) => {
+    setPanelState((current) => ({ ...current, ...patch }))
+  }
+
+  const {
+    selectedModel,
+    selectedSubIndex,
+    aspectRatio,
+    resolution,
+    videoDuration,
+    videoRes,
+    videoQuality,
+    klingFunc,
+    formatOpen,
+    qualityOpen,
+    durationOpen,
+    sceneOpen,
+    modelDropdownOpen,
+    versionDropdownOpen,
+    funcDropdownOpen,
+  } = panelState
 
   // Panel always rendered; slides off-screen when closed
 
   const resetAll = () => {
-    setSelectedModel(models[0])
-    setSelectedSubIndex(0)
-    setAspectRatio('4:3')
-    setResolution('2K')
-    setVideoDuration('5s')
-    setVideoRes('720p')
-    setVideoQuality('Стандарт')
-    setKlingFunc(klingFunctions[0])
+    setPanelState((current) => ({
+      ...createInitialState(models),
+      formatOpen: current.formatOpen,
+      qualityOpen: current.qualityOpen,
+      durationOpen: current.durationOpen,
+      sceneOpen: current.sceneOpen,
+      modelDropdownOpen: current.modelDropdownOpen,
+      versionDropdownOpen: current.versionDropdownOpen,
+      funcDropdownOpen: current.funcDropdownOpen,
+    }))
   }
 
   const collapseAll = () => {
-    setFormatOpen(false)
-    setQualityOpen(false)
-    setDurationOpen(false)
-    setSceneOpen(false)
+    updatePanelState({
+      formatOpen: false,
+      qualityOpen: false,
+      durationOpen: false,
+      sceneOpen: false,
+    })
   }
 
   const expandAll = () => {
-    setFormatOpen(true)
-    setQualityOpen(true)
-    setDurationOpen(true)
+    updatePanelState({
+      formatOpen: true,
+      qualityOpen: true,
+      durationOpen: true,
+    })
   }
 
   const currentAspectRatios = isVideo ? videoAspectRatios : imageAspectRatios
@@ -102,7 +129,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
           <label className="text-xs font-medium text-muted-foreground mb-2 block">Модель</label>
           <div className="relative">
             <button
-              onClick={() => setModelDropdownOpen(!modelDropdownOpen)}
+              onClick={() => updatePanelState({ modelDropdownOpen: !modelDropdownOpen })}
               className="w-full flex items-center gap-2 border border-border rounded-xl px-3 py-2.5 text-sm hover:bg-muted/60 transition-colors"
             >
               <span className={cn('w-2 h-2 rounded-full', isVideo ? 'bg-primary' : 'bg-yellow-500')} />
@@ -115,9 +142,11 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                   <button
                     key={m.id}
                     onClick={() => {
-                      setSelectedModel(m)
-                      setSelectedSubIndex(0)
-                      setModelDropdownOpen(false)
+                      updatePanelState({
+                        selectedModel: m,
+                        selectedSubIndex: 0,
+                        modelDropdownOpen: false,
+                      })
                     }}
                     className={cn(
                       'w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:bg-muted/60 transition-colors text-left',
@@ -138,7 +167,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
           {selectedModel.subModels && selectedModel.subModels.length > 0 && (
             <div className="relative mt-2">
               <button
-                onClick={() => setVersionDropdownOpen(!versionDropdownOpen)}
+                onClick={() => updatePanelState({ versionDropdownOpen: !versionDropdownOpen })}
                 className="w-full flex items-center gap-2 border border-border rounded-xl px-3 py-2.5 text-sm hover:bg-muted/60 transition-colors"
               >
                 <span className="flex-1 text-left truncate">{selectedModel.subModels[selectedSubIndex]?.name ?? selectedModel.name}</span>
@@ -150,8 +179,10 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                     <button
                       key={s.id}
                       onClick={() => {
-                        setSelectedSubIndex(i)
-                        setVersionDropdownOpen(false)
+                        updatePanelState({
+                          selectedSubIndex: i,
+                          versionDropdownOpen: false,
+                        })
                       }}
                       className={cn(
                         'w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm hover:bg-muted/60 transition-colors text-left',
@@ -174,7 +205,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
           {isVideo && selectedModel.id === 'kling-video' && (
             <div className="relative mt-2">
               <button
-                onClick={() => setFuncDropdownOpen(!funcDropdownOpen)}
+                onClick={() => updatePanelState({ funcDropdownOpen: !funcDropdownOpen })}
                 className="w-full flex items-center gap-2 border border-border rounded-xl px-3 py-2.5 text-sm hover:bg-muted/60 transition-colors"
               >
                 <span className="flex-1 text-left truncate">{klingFunc}</span>
@@ -186,8 +217,10 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                     <button
                       key={f}
                       onClick={() => {
-                        setKlingFunc(f)
-                        setFuncDropdownOpen(false)
+                        updatePanelState({
+                          klingFunc: f,
+                          funcDropdownOpen: false,
+                        })
                       }}
                       className={cn(
                         'w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-muted/60 transition-colors',
@@ -205,7 +238,10 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
 
         {/* Aspect ratio */}
         <div>
-          <button onClick={() => setFormatOpen(!formatOpen)} className="flex items-center justify-between w-full text-sm font-medium mb-3">
+          <button
+            onClick={() => updatePanelState({ formatOpen: !formatOpen })}
+            className="flex items-center justify-between w-full text-sm font-medium mb-3"
+          >
             <span className="flex items-center gap-2">
               <ImageIcon size={14} /> {isVideo ? 'Соотношение сторон' : 'Формат'}
             </span>
@@ -215,7 +251,10 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-muted-foreground">Соотношение сторон</span>
-                <button onClick={() => setAspectRatio('4:3')} className="text-[11px] text-primary hover:underline flex items-center gap-1">
+                <button
+                  onClick={() => updatePanelState({ aspectRatio: '4:3' })}
+                  className="text-[11px] text-primary hover:underline flex items-center gap-1"
+                >
                   <RotateCcw className="w-3 h-3" /> Сбросить
                 </button>
               </div>
@@ -223,7 +262,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                 {currentAspectRatios.map((r) => (
                   <button
                     key={r}
-                    onClick={() => setAspectRatio(r)}
+                    onClick={() => updatePanelState({ aspectRatio: r })}
                     className={cn(
                       'py-2 text-xs rounded-lg border transition-colors font-medium',
                       aspectRatio === r ? 'bg-primary text-primary-foreground border-primary' : 'border-border hover:bg-muted/60',
@@ -240,7 +279,10 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
         {/* Video: Duration */}
         {isVideo && (
           <div>
-            <button onClick={() => setDurationOpen(!durationOpen)} className="flex items-center justify-between w-full text-sm font-medium mb-3">
+            <button
+              onClick={() => updatePanelState({ durationOpen: !durationOpen })}
+              className="flex items-center justify-between w-full text-sm font-medium mb-3"
+            >
               <span className="flex items-center gap-2">
                 <Clock size={14} /> Длина видео
               </span>
@@ -251,7 +293,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                 {videoDurations.map((d) => (
                   <button
                     key={d}
-                    onClick={() => setVideoDuration(d)}
+                    onClick={() => updatePanelState({ videoDuration: d })}
                     className={cn(
                       'py-2 text-xs rounded-lg border transition-colors font-medium',
                       videoDuration === d ? 'bg-primary text-primary-foreground border-primary' : 'border-border hover:bg-muted/60',
@@ -267,7 +309,10 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
 
         {/* Quality / Resolution */}
         <div>
-          <button onClick={() => setQualityOpen(!qualityOpen)} className="flex items-center justify-between w-full text-sm font-medium mb-3">
+          <button
+            onClick={() => updatePanelState({ qualityOpen: !qualityOpen })}
+            className="flex items-center justify-between w-full text-sm font-medium mb-3"
+          >
             <span className="flex items-center gap-2">
               <Palette size={14} /> {isVideo ? 'Разрешение' : 'Качество'}
             </span>
@@ -283,7 +328,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                       {videoResolutions.map((r) => (
                         <button
                           key={r}
-                          onClick={() => setVideoRes(r)}
+                          onClick={() => updatePanelState({ videoRes: r })}
                           className={cn(
                             'flex-1 py-2 text-xs rounded-lg border transition-colors font-medium',
                             videoRes === r ? 'bg-primary text-primary-foreground border-primary' : 'border-border hover:bg-muted/60',
@@ -300,7 +345,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                       {videoQualities.map((q) => (
                         <button
                           key={q}
-                          onClick={() => setVideoQuality(q)}
+                          onClick={() => updatePanelState({ videoQuality: q })}
                           className={cn(
                             'flex-1 py-2 text-xs rounded-lg border transition-colors font-medium',
                             videoQuality === q ? 'bg-primary text-primary-foreground border-primary' : 'border-border hover:bg-muted/60',
@@ -316,7 +361,10 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs text-muted-foreground">Разрешение</span>
-                    <button onClick={() => setResolution('2K')} className="text-[11px] text-primary hover:underline flex items-center gap-1">
+                    <button
+                      onClick={() => updatePanelState({ resolution: '2K' })}
+                      className="text-[11px] text-primary hover:underline flex items-center gap-1"
+                    >
                       <RotateCcw className="w-3 h-3" /> Сбросить
                     </button>
                   </div>
@@ -324,7 +372,7 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
                     {resolutions.map((r) => (
                       <button
                         key={r}
-                        onClick={() => setResolution(r)}
+                        onClick={() => updatePanelState({ resolution: r })}
                         className={cn(
                           'flex-1 py-2 text-xs rounded-lg border transition-colors font-medium',
                           resolution === r ? 'bg-primary text-primary-foreground border-primary' : 'border-border hover:bg-muted/60',
@@ -343,7 +391,10 @@ export function RightPanel({ open, onClose }: RightPanelProps) {
         {/* Video: Scene builder */}
         {isVideo && (
           <div>
-            <button onClick={() => setSceneOpen(!sceneOpen)} className="flex items-center justify-between w-full text-sm font-medium mb-3">
+            <button
+              onClick={() => updatePanelState({ sceneOpen: !sceneOpen })}
+              className="flex items-center justify-between w-full text-sm font-medium mb-3"
+            >
               <span className="flex items-center gap-2">
                 <Film size={14} /> Конструктор сцены
               </span>

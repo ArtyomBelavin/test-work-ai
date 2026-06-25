@@ -49,7 +49,8 @@ const defaultNotifications: Notification[] = [
 
 const iconMap = { gift: Gift, spark: Sparkles, zap: Zap, info: Info }
 
-const iconBtn =
+//По хорошему вынести в отдельный файл и импортировать от туда в нужные места
+const classNameIconBtn =
   'relative w-9 h-9 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:bg-card transition-colors flex items-center justify-center'
 
 export function NotificationsDropdown() {
@@ -78,7 +79,7 @@ export function NotificationsDropdown() {
           setOpen(!open)
           if (!open) markAllRead()
         }}
-        className={iconBtn}
+        className={classNameIconBtn}
         aria-label="Уведомления"
       >
         <Bell className="h-4 w-4" />

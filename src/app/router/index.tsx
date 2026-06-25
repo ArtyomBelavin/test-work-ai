@@ -18,6 +18,8 @@ import AudioGenerationPage from '@/pages/AudioGenerationPage'
 import NanoBananaPage from '@/pages/NanoBananaPage'
 import ToolPage from '@/pages/ToolPage'
 import NotFound from '@/pages/NotFound'
+import QueuePage from '@/pages/QueuePage'
+import ChatStatusPage from '@/pages/ChatStatusPage'
 
 const routes: Record<string, React.ComponentType> = {
   '/': Index,
@@ -31,6 +33,8 @@ const routes: Record<string, React.ComponentType> = {
   '/history': HistoryPage,
   '/pricing': PricingPage,
   '/auth': AuthPage,
+  '/queue': QueuePage,
+  '/chat-status': ChatStatusPage,
   '/tools/text-generation': TextGenerationPage,
   '/tools/image-generation': ImageGenerationPage,
   '/tools/video-generation': VideoGenerationPage,
