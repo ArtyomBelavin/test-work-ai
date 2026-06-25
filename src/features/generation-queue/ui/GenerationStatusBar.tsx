@@ -44,7 +44,9 @@ function MiniTask({ task }: { task: GenerationTask }) {
           <ProgressBar value={task.progress} compact />
         </div>
       </div>
-      <div className="text-right font-mono text-xs font-semibold text-[var(--c-accent-2)]">{task.status === 'queued' ? 'в очереди' : `${task.progress}%`}</div>
+      <div className="text-right font-mono text-xs font-semibold text-[var(--c-accent-2)]">
+        {task.status === 'queued' ? 'в очереди' : `${task.progress}%`}
+      </div>
     </div>
   )
 }

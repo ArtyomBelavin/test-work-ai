@@ -120,7 +120,9 @@ export default function ChatStatusPage() {
               onClick={() => setActiveTab(tab.id)}
               className={cn(
                 'h-13 min-w-[92px] rounded-t-[12px] border border-[var(--c-line)] bg-[var(--c-bg-1)] px-5 text-base font-semibold transition',
-                activeTab === tab.id ? 'relative z-10 border-[var(--c-accent)]/80 text-[var(--c-accent-2)]' : 'text-[var(--c-fg-mute)] hover:text-[var(--c-fg-dim)]',
+                activeTab === tab.id
+                  ? 'relative z-10 border-[var(--c-accent)]/80 text-[var(--c-accent-2)]'
+                  : 'text-[var(--c-fg-mute)] hover:text-[var(--c-fg-dim)]',
                 index > 0 && '-ml-px',
               )}
             >
